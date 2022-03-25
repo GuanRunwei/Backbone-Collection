@@ -158,10 +158,10 @@ class Block(nn.Module):
 
     def forward(self, x):
         # res1 = batch, 196, 768 + Dropout(Mix_Attention(LayerNorm(batch, 196, 768))) -> batch, 196, 768
-        x += self.drop_path(self.attn(self.norm1(x)))
+        x = x + self.drop_path(self.attn(self.norm1(x)))
 
         # res2 = res1 + Dropout(MLP(LayerNorm(res1))) -> batch, 196, 768
-        x += self.drop_path(self.mlp(self.norm2(x)))
+        x = x + self.drop_path(self.mlp(self.norm2(x)))
         return x
 
 
